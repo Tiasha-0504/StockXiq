@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alpha-X | Financial Intelligence Dashboard</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1 class="title">StockXIQ</h1>
+            <p class="subtitle">Financial Intelligence Dashboard</p>
+        </header>
+
+        <main>
+            <section class="input-section">
+                <div class="input-container">
+                    <label for="headline-input">Enter Stock News Headline</label>
+                    <textarea 
+                        id="headline-input" 
+                        placeholder="Paste your news headline here... e.g., 'Apple announces breakthrough AI chip technology'"
+                        rows="4"
+                    ></textarea>
+                    <button id="analyze-btn" class="analyze-button">
+                        <span class="btn-text">Analyze Market</span>
+                        <span class="btn-spinner" style="display: none;">
+                            <span class="spinner"></span>
+                        </span>
+                    </button>
+                </div>
+            </section>
+
+            <section id="results-section" class="results-section" style="display: none;">
+                <div class="signal-card">
+                    <div class="signal-header">
+                        <h2>Market Signal</h2>
+                    </div>
+                    <div class="signal-content">
+                        <div id="signal-display" class="signal-display">
+                            <span id="signal-text" class="signal-text">HOLD</span>
+                            <span id="signal-emoji" class="signal-emoji">⚪</span>
+                        </div>
+                        <p id="signal-reason" class="signal-reason" style="font-style: italic; color: #aaa; margin-top: 10px;">Waiting for analysis...</p>
+                        <p id="signal-headline" class="signal-headline"></p>
+                    </div>
+                </div>
+
+                <div class="metrics-grid">
+                    <div class="metric-card">
+                        <div class="metric-header">
+                            <h3>Market Beat</h3>
+                        </div>
+                        <div class="metric-value" id="market-beat-value">
+                            <span class="value">--</span>
+                        </div>
+                        <div class="metric-description">
+                            Expected profit/loss percentage
+                        </div>
+                    </div>
+
+                    <div class="metric-card">
+                        <div class="metric-header">
+                            <h3>Signal Strength</h3>
+                        </div>
+                        <div class="metric-value" id="signal-strength-value">
+                            <span class="value">--</span>
+                        </div>
+                        <div class="metric-description">
+                            Confidence level of the signal
+                        </div>
+                    </div>
+
+                    <div class="metric-card">
+                        <div class="metric-header">
+                            <h3>Panic Check</h3>
+                        </div>
+                        <div class="metric-value" id="panic-check-value">
+                            <span class="value">--</span>
+                        </div>
+                        <div class="metric-description">
+                            Risk assessment level
+                        </div>
+                    </div>
+                </div>
+
+                <div class="ripple-section" id="ripple-section" style="display: none;">
+                    <div class="ripple-header">
+                        <h3>Stocks Affected by this News</h3>
+                    </div>
+                    <div class="ripple-list" id="ripple-list">
+                        <!-- Ripple effect stocks will be populated here -->
+                    </div>
+                </div>
+            </section>
+
+            <section id="error-section" class="error-section" style="display: none;">
+                <div class="error-card">
+                    <h3>⚠️ Error</h3>
+                    <p id="error-message"></p>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
+
