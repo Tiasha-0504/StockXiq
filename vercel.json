@@ -1,4 +1,8 @@
 {
-  "buildCommand": "mkdir -p dist && cp index.html style.css script.js dist/",
-  "outputDirectory": "dist"
+  "version": 2,
+  "builds": [
+    { "src": "index.html", "use": "@vercel/static" },
+    { "src": "style.css", "use": "@vercel/static" },
+    { "src": "script.js", "use": "@vercel/static" }
+  ]
 }
