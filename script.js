@@ -2,7 +2,7 @@
 // IMPORTANT: Replace this with your Hugging Face Space URL once created!
 // Example: 'https://username-spacename.hf.space'
 // For local testing, keep it as 'http://localhost:5000'
-const API_URL = 'https://creek007-stockxiq-api.hf.space';
+const API_URL = 'https://Dreek007-stockxiq-api.hf.space';
 
 const headlineInput = document.getElementById('headline-input');
 const analyzeBtn = document.getElementById('analyze-btn');
@@ -31,19 +31,19 @@ headlineInput.addEventListener('keydown', (e) => {
 
 async function handleAnalyze() {
     const headline = headlineInput.value.trim();
-    
+
     if (!headline) {
         showError('Please enter a headline to analyze.');
         return;
     }
-    
+
     // Hide previous results and errors
     resultsSection.style.display = 'none';
     errorSection.style.display = 'none';
-    
+
     // Show loading state
     setLoadingState(true);
-    
+
     try {
         const response = await fetch(`${API_URL}/predict`, {
             method: 'POST',
@@ -52,15 +52,15 @@ async function handleAnalyze() {
             },
             body: JSON.stringify({ headline: headline })
         });
-        
+
         const data = await response.json();
-        
+
         if (!response.ok) {
             throw new Error(data.error || 'Prediction failed');
         }
-        
+
         displayResults(data);
-        
+
     } catch (error) {
         console.error('Error:', error);
         showError(error.message || 'Failed to analyze headline. Please check if the server is running.');
@@ -72,7 +72,7 @@ async function handleAnalyze() {
 function setLoadingState(loading) {
     const btnText = analyzeBtn.querySelector('.btn-text');
     const btnSpinner = analyzeBtn.querySelector('.btn-spinner');
-    
+
     if (loading) {
         analyzeBtn.disabled = true;
         btnText.style.display = 'none';
@@ -93,7 +93,7 @@ function displayResults(data) {
     // 🟢 NEW: Update Reason Text
     if (signalReason) {
         signalReason.textContent = data.reason;
-        
+
         // Optional: Add dynamic coloring for the reason text
         if (data.signal === 'BUY') {
             signalReason.style.color = '#4ade80'; // Green
@@ -103,7 +103,7 @@ function displayResults(data) {
             signalReason.style.color = '#fbbf24'; // Yellow/Orange
         }
     }
-    
+
     // Apply signal color classes
     signalText.className = 'signal-text';
     if (data.signal === 'BUY') {
@@ -113,7 +113,7 @@ function displayResults(data) {
     } else {
         signalText.classList.add('signal-hold');
     }
-    
+
     // Display Market Beat
     const beatValue = data.market_beat_value;
     const beatElement = marketBeatValue.querySelector('.value');
@@ -126,17 +126,17 @@ function displayResults(data) {
     } else {
         marketBeatValue.classList.add('neutral');
     }
-    
+
     // Display Signal Strength
     const strengthElement = signalStrengthValue.querySelector('.value');
     strengthElement.textContent = data.signal_strength;
     signalStrengthValue.className = 'metric-value neutral';
-    
+
     // Display Panic Check
     const panicElement = panicCheckValue.querySelector('.value');
     panicElement.textContent = data.panic_check;
     panicCheckValue.className = 'metric-value';
-    
+
     // Apply panic color based on level
     if (data.panic_check.includes('High Risk') || data.panic_check.includes('Chaos')) {
         panicCheckValue.classList.add('negative');
@@ -145,7 +145,7 @@ function displayResults(data) {
     } else {
         panicCheckValue.classList.add('positive');
     }
-    
+
     // Display Ripple Effect
     if (data.ripple_effect && data.ripple_effect.length > 0) {
         rippleList.innerHTML = '';
@@ -153,30 +153,30 @@ function displayResults(data) {
             // Handle both object format (with ticker and reason) and string format (backward compatibility)
             const ticker = typeof stock === 'object' ? stock.ticker : stock;
             const reason = typeof stock === 'object' ? stock.reason : '';
-            
+
             const item = document.createElement('div');
             item.className = 'ripple-item';
-            
+
             const tickerSpan = document.createElement('span');
             tickerSpan.className = 'ripple-ticker';
             tickerSpan.textContent = ticker;
-            
+
             item.appendChild(tickerSpan);
-            
+
             if (reason) {
                 const reasonSpan = document.createElement('span');
                 reasonSpan.className = 'ripple-reason';
                 reasonSpan.textContent = ` - ${reason}`;
                 item.appendChild(reasonSpan);
             }
-            
+
             rippleList.appendChild(item);
         });
         rippleSection.style.display = 'block';
     } else {
         rippleSection.style.display = 'none';
     }
-    
+
     // Show results section
     resultsSection.style.display = 'block';
     resultsSection.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
