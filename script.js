@@ -2,7 +2,7 @@
 // IMPORTANT: Replace this with your Hugging Face Space URL once created!
 // Example: 'https://username-spacename.hf.space'
 // For local testing, keep it as 'http://localhost:5000'
-const API_URL = 'http://localhost:5000';
+const API_URL = 'https://creek007-stockxiq-api.hf.space';
 
 const headlineInput = document.getElementById('headline-input');
 const analyzeBtn = document.getElementById('analyze-btn');
