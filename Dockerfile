@@ -29,7 +29,6 @@ ENV PORT=7860
 EXPOSE 7860
 
 # Start script
-COPY start.sh /start.sh
-RUN chmod +x /start.sh
+RUN chmod +x $HOME/app/start.sh
 
-CMD ["/start.sh"]
+CMD ["./start.sh"]
