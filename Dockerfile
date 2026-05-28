@@ -13,8 +13,16 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 COPY requirements.txt ./
 RUN pip install --no-cache-dir -r requirements.txt
 
-# Copy app
-COPY . /app
+# Create user with UID 1000 as required by Hugging Face Spaces
+RUN useradd -m -u 1000 user
+USER user
+ENV HOME=/home/user \
+    PATH=/home/user/.local/bin:$PATH
+
+WORKDIR $HOME/app
+
+# Copy app with proper permissions
+COPY --chown=user . $HOME/app
 
 # Expose the default HF Space port
 ENV PORT=7860
