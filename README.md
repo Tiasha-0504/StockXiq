@@ -86,4 +86,4 @@ Notes:
 - The container runs `start.sh` which launches `gunicorn` and serves the Flask API. The default port is `7860`.
 - The app will attempt to load models from `models/`. If missing and `HF_REPO_ID` is set, it will call `hf_hub_download` to pull the binaries.
 
-If you'd like, I can prepare a ready-to-push Space repo layout and test that the app loads remotely (you'll need to provide the HF token or make the model repo public). 
+
